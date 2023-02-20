@@ -8,9 +8,9 @@
 
 void swap(int *x, int *y)
 {
-    int temp = *x;
-    *x = *y;
-    *y = temp;
+        int temp = *x;
+        *x = *y;
+        *y = temp;
 }
 
 /**
@@ -23,7 +23,7 @@ void swap(int *x, int *y)
 
 void bubble_sort(int *array, size_t size)
 {
-	size_t i, j, temp;
+        size_t i, j, temp;
 
 	if (size >= 2)
 	{
