@@ -1,4 +1,5 @@
-#include"sort.h"
+#include "sort.h"
+
 int lomuto_partition(int *array, int high, int low, size_t size);
 void lomuto_sort(int *array, int low, int high, size_t size);
 void quick_sort(int *array, size_t size);
@@ -15,29 +16,30 @@ void quick_sort(int *array, size_t size);
 
 int lomuto_partition(int *array, int high, int low, size_t size)
 {
-	int pivot = array[high];
-	int i = (low - 1);
+	int *pivot = array[high];
+	int i = low;
 	int temp;
 
-	for (int j = low; j <= (high - 1); j++)
+	for (int j = low; j < high; j++)
 	{
-		if (array[j] < pivot)
+		if (array[j] < *pivot)
+
 		{
 			temp = array[j];
 			array[j] = array[i];
 			array[i] = temp;
 			print_array(array, size);
-			i++;
 		}
+		i++;
 	}
-	if (array[high] > pivot)
+	if (array[high] > *pivot)
 	{
-		temp = array[i + 1];
-		array[i + 1] = array[high];
-		array[high] = temp;
+		temp = array[i];
+		array[i] = pivot;
+		pivot = temp;
 		print_array(array, size);
 	}
-	return (i + 1);
+	return (i);
 }
 /**
  * lomuto_sort - recursivly implement the quicksort algorithm

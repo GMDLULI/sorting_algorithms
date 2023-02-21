@@ -10,29 +10,28 @@
 
 void shell_sort(int *array, size_t size)
 {
-	size_t i, j, h = 1;
+	size_t i, j, h;
 
 	if (array == NULL || size < 2)
 		return;
 
-	while (h < size /3)
+	for ( h = 1; h < (size /3);)
 	{
 		h = (h * 3) + 1;
 	}
-	while (h > 0)
+	for (; h >= 1; h /= 3)
 	{
 		for (i = h; i < size; i++)
 		{
 			int value = array[i];
 			j = i;
-			while (j >= h - 1 && array[j - h] >= value)
+			while (j >= h && array[j - h] > value)
 			{
 				array[j] = array[j - h];
-				j = j - h;
+				j -= h;
 			}
-			array[j] = value
+			array[j] = value;
 		}
-		h = (h - 1) /3;
 		print_array(array, size);
 	}
 }
