@@ -25,17 +25,17 @@ int lomuto_partition(int *array, int high, int low, size_t size)
 		if (array[j] < *pivot)
 
 		{
-			temp = array[j];
-			array[j] = array[i];
-			array[i] = temp;
+			temp = array + j;
+			array + j = array + i;
+			array + i = temp;
 			print_array(array, size);
 		}
 		i++;
 	}
 	if (array[high] > *pivot)
 	{
-		temp = array[i];
-		array[i] = pivot;
+		temp = array + i;
+		array + i = pivot;
 		pivot = temp;
 		print_array(array, size);
 	}
@@ -54,11 +54,11 @@ void lomuto_sort(int *array, int low, int high, size_t size)
 	int pi;
 
 
-	if (low < high)
+	if (low - high > 0)
 	{
 		pi = lomuto_partition(array, low, high, size);
-		lomuto_sort(array, low, (pi - 1), size);
-		lomuto_sort(array, (pi + 1), high, size);
+		lomuto_sort(array, size, low, pi - 1);
+		lomuto_sort(array, size, pi + 1, high);
 	}
 }
 
