@@ -1,5 +1,6 @@
 #include "sort.h"
 
+void swap_ints(int *a, int *b);
 int lomuto_partition(int *array, int high, int low, size_t size);
 void lomuto_sort(int *array, int low, int high, size_t size);
 void quick_sort(int *array, size_t size);
@@ -11,10 +12,12 @@ void quick_sort(int *array, size_t size);
 void swap_ints(int *a, int *b)
 {
 	int tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	if (*a != *b)
+	{
+		tmp = *a;
+		*a = *b;
+		*b = tmp;
+	}
 }
 /**
  * lomuto_partition - order a subset of an array of integers according to
@@ -32,21 +35,21 @@ int lomuto_partition(int *array, int right, int left, size_t size)
 	int i = left;
 	int temp;
 
-	for (int j = i; j < right; j++)
+	for (int j = left; j < right; j++)
 	{
 		if (array[j] < *pivot)
 		{
 			if (i < j)
 			{
-				swap_ints(array + j, array + i);
+				swap_ints(&array[j], &array[i]);
 				print_array(array, size);
+				i++;
 			}
-			i++;
 		}
 	}
 	if (array[i] > *pivot)
 	{
-		swap_ints(array + i, pivot);
+		swap_ints(&array[i], &pivot);
 		print_array(array, size);
 	}
 	return (i);
