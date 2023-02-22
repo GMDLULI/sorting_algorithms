@@ -1,11 +1,12 @@
 #include "sort.h"
 /**
- * max_interger - returns the maximun integer of the array
+ * max_int - returns the maximun integer of the array
  * @array: pointer to the array
  * @size: size of array
+ * Return: the max value of array
  */
 
-int max_integer(int *array, int size)
+int max_int(int *array, int size)
 {
 	int max = array[0], i;
 
@@ -25,7 +26,7 @@ int max_integer(int *array, int size)
 void counting_sort(int *array, size_t size)
 {
 	size_t i, j;
-	int k = max_integer(array, size);
+	int k = max_int(array, size);
 
 	int *count = malloc(sizeof(int) * k + 1);
 
