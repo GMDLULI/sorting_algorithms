@@ -24,22 +24,23 @@ void swap(int *x, int *y)
 void selection_sort(int *array, size_t size)
 {
 	size_t i, j;
+	size_t min_value;
 
 	if (array == NULL || size < 2)
 		return;
 
 	for (i = 0; i < size - 1; i++)
 	{
-		int *min_value = array + i;
-
+		min_value = i;
 		for (j = i + 1; j < size; j++)
 		{
-			min_value = (array[j] < *min_value) ? (array + j) : min_value;
+			if (array[j] < array[min_value])
+				min_value = j;
 		}
-	}
-	if ((array + i) != min_value)
-	{
-		swap(&array[i], min_value);
-		print_array(array, size);
+		if (min_value != i)
+		{
+			swap(&array[i], &array[min_value]);
+			print_array(array, size);
+		}
 	}
 }
