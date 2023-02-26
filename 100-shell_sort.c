@@ -30,16 +30,15 @@ void shell_sort(int *array, size_t size)
 
 	for (h = 1; h < (size / 3);)
 	{
-		h = (h * 3) + 1;
+		h = h * 3 + 1;
 	}
 	for (; h >= 1; h /= 3)
 	{
 		for (i = h; i < size; i++)
 		{
-			int value = array[j];
 
 			j = i;
-			while (j >= h && array[j - h] > value)
+			while (j >= h && array[j - h] > array[j])
 			{
 				swap_ints(array + j, array + (j - h));
 				j -= h;
