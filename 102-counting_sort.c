@@ -1,65 +1,68 @@
 #include "sort.h"
+
 /**
- * max_int - returns the maximun integer of the array
- * @array: pointer to the array
- * @size: size of array
- * Return: the max value of array
+ * get_max - Get the maximum value in an array of integers.
+ * @array: An array of integers.
+ * @size: The size of the array.
+ *
+ * Return: The maximum integer in the array.
  */
-
-int max_int(int *array, int size)
+int get_max(int *array, int size)
 {
-	int max = array[0], i;
+	int max, i;
 
-	for (i = 1; i < size; i++)
+	for (max = array[0], i = 1; i < size; i++)
 	{
 		if (array[i] > max)
 			max = array[i];
 	}
+
 	return (max);
 }
-/**
- * counting_sort - Sorts an array of intergers using counting sort algo
- * @array: A pointer to the array to be sorted
- * @size: the size of the array
- */
 
+/**
+ * counting_sort - Sort an array of integers in ascending order
+ *                 using the counting sort algorithm.
+ * @array: An array of integers.
+ * @size: The size of the array.
+ *
+ * Description: Prints the counting array after setting it up.
+ */
 void counting_sort(int *array, size_t size)
 {
-	size_t i, j;
-	int k = max_int(array, size);
+	int *count, *sorted, max, i;
 
-	int *count = malloc(sizeof(int) * k + 1);
+	if (array == NULL || size < 2)
+		return;
 
+	sorted = malloc(sizeof(int) * size);
+	if (sorted == NULL)
+		return;
+	max = get_max(array, size);
+	count = malloc(sizeof(int) * (max + 1));
 	if (count == NULL)
+	{
+		free(sorted);
 		return;
+	}
 
-	for (i = 0; i < count[i]; i++)
+	for (i = 0; i < (max + 1); i++)
 		count[i] = 0;
+	for (i = 0; i < (int)size; i++)
+		count[array[i]] += 1;
+	for (i = 0; i < (max + 1); i++)
+		count[i] += count[i - 1];
+		print_array(count, max + 1);
 
-	for (i = 0; i < size; i++)
-		count[array[i]]++;
-
-	for (i = 1; i < k + 1; i++)
+	for (i = 0; i < (int)size; i++)
 	{
-		count[i] = count[i] + count[i - 1];
+		sorted[count[array[i]] - 1] = array[i];
+		count[array[i]] -= 1;
 	}
 
-	print_array(count, k + 1);
+	for (i = 0; i < (int)size; i++)
+		array[i] = sorted[i];
 
-	int *output = malloc(sizeof(int) * size);
-
-	if (output == NULL)
-		return;
-
-	for (i = size - 1; i <= k; i--)
-	{
-		output[--count[array[i]]] = array[i];
-	}
-
-	for (i = 0; i < size; i++)
-	{
-		array[i] = output[i];
-	}
+	free(sorted);
 	free(count);
-	free(output);
 }
