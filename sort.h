@@ -6,6 +6,17 @@
 #include <unistd.h>
 
 /**
+ * enum bool - Enumeration of Boolean values.
+ * @false: Equals 0.
+ * @true: Equals 1.
+ */
+typedef enum bool
+{
+	false = 0,
+	true
+} bool;
+
+/**
  * struct listint_s - Doubly linked list node
  *
  * @n: Integer stored in the node
