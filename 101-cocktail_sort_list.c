@@ -1,8 +1,8 @@
 #include "sort.h"
 
 void cocktail_sort_list(listint_t **list);
-void swap_node_behind(listint_t **list, listint_t **end, listint_t **current);
-void swap_node_ahead(listint_t **list, listint_t **end, listint_t **current);
+void swap_node_behind(listint_t **list, listint_t **end, listint_t **shaker);
+void swap_node_ahead(listint_t **list, listint_t **end, listint_t **shaker);
 
 /**
  * swap_node_ahead - Swaps a node in a listint_t doubly-linked list
